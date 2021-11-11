@@ -1,8 +1,21 @@
-import React from "react";
+import React,{useRef} from "react";
+import emailjs from 'emailjs-com';
 import "./Contact.css"
 import Navbar from './Navbar';
 import Footer from './Footer';
 const Contact = ({history}) => {
+    const form = useRef();
+
+    const sendEmail = (e) => {
+      e.preventDefault();
+  
+      emailjs.sendForm('service_h8fgo0w', 'template_08iosfs', e.target, 'user_rc4mZDeOcp0lvQEEl8EC7')
+        .then((result) => {
+            window.alert('Your message has been sent!');
+        }, (error) => {
+            console.log(error.text);
+        });
+    };
     return (
         <>
         <Navbar/>
@@ -14,7 +27,7 @@ const Contact = ({history}) => {
 
                     <h3 class="text-center font-weight-bold text-white mt-3 mb-5">Contact Us</h3>
 
-                    <form class="mx-md-5" action="">
+                    <form class="mx-md-5" ref={form} onSubmit={sendEmail} action="">
 
                         <div class="row">
                             <div class="col-md-6 mb-4">
@@ -23,16 +36,15 @@ const Contact = ({history}) => {
                                     <div class="card-body px-4">
 
                                         <div class="md-form md-outline mt-0">
-                                            <input type="text" id="name" class="form-control" />
-                                            <label for="name">Your Name</label>
+                                            <input type="text" placeholder="user_name" class="form-control mb-3" name="user_name" />
+                                           
                                         </div>
                                         <div class="md-form md-outline">
-                                            <input type="text" id="email" class="form-control" />
-                                            <label for="email">Your Email Address</label>
+                                            <input type="email"placeholder="user_email" class="form-control mb-3"name="user_email" />
+                                            
                                         </div>
                                         <div class="md-form md-outline">
-                                            <textarea id="message" class="md-textarea form-control" rows="3"></textarea>
-                                            <label for="message">Your Message</label>
+                                            <textarea type="text"placeholder="Your message" class="md-textarea form-control mb-3"  rows="3" name="message"></textarea>
                                         </div>
 
                                         <button type="submit" class="btn btn-primary btn-md btn-block ml-0 mb-0">Submit inquiry</button>
@@ -70,3 +82,7 @@ const Contact = ({history}) => {
 }
 
 export default Contact;
+
+
+
+// service_d22qsmh
