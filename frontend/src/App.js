@@ -20,6 +20,7 @@ import TransporterSignup from './Transporter/TransporterSignUp';
 import TransporterTruckList from './Transporter/TransporterTruckList';
 import BookingRequest from './Transporter/BookingRequest';
 import Update from './Transporter/Update';
+import TruckDetails from './Transporter/TruckDetails';
 function App() {
   return (
     <div className="App">
@@ -39,6 +40,7 @@ function App() {
           <Route path="/registerTruck" render={props => <RegisterTruck {...props} />} />
           <Route path="/customer/payment" render={props => <Pay {...props}/>} />
           <Route path="/transporteTruckList" render={props => <TransporterTruckList {...props} />} />
+          <Route path="/truckDetails/:number" render={props => <TruckDetails {...props} />} />
           <Route path="/transporter/updateTruck/:id" render={props=> <Update {...props}/>} />
           <Route path="/bookingRequests" render={props => <BookingRequest {...props} />} />
           <Route path="/trans/history" render={props => <History {...props} />} />

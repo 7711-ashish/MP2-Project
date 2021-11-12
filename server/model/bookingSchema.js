@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const bookingSchema = new mongoose.Schema({
   bookingId: {
-    type: Number
+    type: String
   },
   user:{
     type: String
@@ -44,6 +44,12 @@ const bookingSchema = new mongoose.Schema({
   },
   Address2:{
     type: String
+  },
+  transconfirm :{
+    type: Boolean
+  },
+  status:{
+    type : Boolean
   }
 })
 const Booking = mongoose.model('BOOK',bookingSchema);

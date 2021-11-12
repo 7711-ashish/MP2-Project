@@ -28,7 +28,7 @@ const Update = ({history}) => {
                    "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
-                    name: name,number:number,pickupcity:pickupcity,dropcity:dropcity,capacitty:capacitty.replace,price:price
+                    name: name,number:number,pickupcity:pickupcity,dropcity:dropcity,capacitty:capacitty,price:price
                 })
             }).then(res => res.json()).then(data=>{console.log(data);history.push("/transporteTruckList")})
         }

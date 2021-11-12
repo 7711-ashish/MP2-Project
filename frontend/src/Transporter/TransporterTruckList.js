@@ -19,10 +19,16 @@ const TransporterTruckList = ({ history }) => {
         ).then(res => res.json()).then(data =>{setdata(data)});
 
     }
+  
     // useEffect(() => {
     //     loadData();
     //     return () => { };
     // }, []);
+    const handleDetails = async (e,truck) => {
+        e.preventDefault();
+        history.push(`/truckDetails/${truck.number}`);
+    }
+
     const handleUpdate=(e,truck)=>{
         e.preventDefault();
         console.log(truck)
@@ -75,9 +81,6 @@ const TransporterTruckList = ({ history }) => {
                                 <th className="font-weight-bold">
                                     <strong>Capacity</strong>
                                 </th>
-                                <th className="font-weight-bold">
-                                    <strong>Trans Email</strong>
-                                </th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -94,9 +97,6 @@ const TransporterTruckList = ({ history }) => {
                                 <td className="font-weight-bold">
                                     <strong>{truck.capacitty}</strong>
                                 </td>
-                                <td className="font-weight-bold">
-                                    <strong>{truck.transemail}</strong>
-                                </td>
                                 <td>
                                     <button type="button" className="btn btn-sm btn-primary mx-2" data-toggle="tooltip" data-placement="top"
                                         title="BOOK NOW" onClick={e=>handleUpdate(e,truck)}>UPDATE
@@ -105,10 +105,11 @@ const TransporterTruckList = ({ history }) => {
                                         title="BOOK NOW" onClick={e=>handleDelete(e,truck)}>DELETE
                                     </button>
                                     <button type="button" className="btn btn-sm btn-primary mt-2" data-toggle="tooltip" data-placement="top"
-                                        title="DETAILS" >DETAILS
+                                        title="DETAILS" onClick={e=>handleDetails(e,truck)}>DETAILS
                                     </button>
                                 </td>
                             </tr>
+                           
                         </tbody>
                     </table>
                 </div>
@@ -116,6 +117,7 @@ const TransporterTruckList = ({ history }) => {
         )
         )
         }
+        
         </div>
     );
 }

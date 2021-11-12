@@ -43,7 +43,7 @@ const BookingRequest = ({ history }) => {
         <div className="container">
             <button onClick={e=>{loadData(e)}} className="btn btn-lg btn-primary mt-4 my-4">CLICK HERE TO SHOW LIST</button>
         {
-        data.map((truck,idx) => (
+        data.err?<h1>{data.err}</h1>:data.map((truck,idx) => (
             <section className="card mb-2" key={idx}>
                 <div className="table-responsive">
                     <table className="table product-table table-cart-v-1">

@@ -17,6 +17,7 @@ const CustomerHistory = ({ history }) => {
             })
         }
         ).then(res => res.json()).then(data =>{setdata(data)});
+        data.reverse()
     }
     return (
         <div className="container">
@@ -76,6 +77,7 @@ const CustomerHistory = ({ history }) => {
                     </table>
                     <div>
                         {truck.transconfirm?<button className="btn btn-success col-lg-4" disabled>CONFIRMED</button>:<button className="btn btn-danger">PENDING</button>}
+                        {truck.transconfirm&&truck.status?<button className="btn btn-success col-lg-4" disabled>CONFIRMED</button>:<></>}
                     </div>
                 </div>
             </section>

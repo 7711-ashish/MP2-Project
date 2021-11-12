@@ -127,7 +127,7 @@ const CustomerSignup = ({history}) => {
                                         </div>
                                         <div className="md-form mt-3">
                                             <i className="fas fa-key prefix grey-text"></i>
-                                            <input type="text" id="form4"placeholder="name" name="date"value={user.date} className="form-control" />
+                                            <input type="date" id="form4"placeholder="date" name="date"value={user.date} className="form-control" onChange={e => handleChangeEvent(e)} />
                                             {/* <label for="form4">Date of Birth</label> */}
                                         </div>
                                         <div className="text-center my-3">

@@ -16,7 +16,7 @@ const History = ({ history }) => {
             })
         }
         ).then(res => res.json()).then(data =>{setdata(data)});
-        data.sort((a, b) => (a.date > b.date) ? 1 : -1);
+        // data.sort((a, b) => (a.date > b.date) ? 1 : -1);
 
     }
 

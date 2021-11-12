@@ -172,6 +172,17 @@ router.route("/truck").post(async(req,res)=>{
       console.log(err)
     }
 })
+router.route("/truck/:number").post(async(req,res)=>{
+  const number = req.body.number;
+  console.log(number);
+  try{
+    const truckList = await Truck.findOne({number :number});
+    console.log(truckList);
+    res.json(truckList);
+  }catch(err){
+    console.log(err)
+  }
+})
 
 router.route("/userTruckList").post(async(req,res)=>{
   const{pickupcity, dropcity, capacitty} = req.body;
@@ -303,7 +314,7 @@ router.route('/booking').post(async(req,res)=>{
       const status = false;
       const bookingId = Booking.countDocuments()+1;
       const transconfirm = false;
-      const book = new Booking({bookingId,user, pickupcity, dropcity, date, weight,transemail:adminemail,truckid,typeofgoods,price,status,transconfirm,Address1,Address2});
+      const book = new Booking({bookingId,user, pickupcity, dropcity, date, weight,transemail:adminemail,truckid,typeofgoods,price,Address1,Address2,transconfirm,status});
       const bookReq = book.save();
       console.log(bookReq);
       res.status(201).json({message:"Booking data saved successfully"});
@@ -331,9 +342,11 @@ router.route('/bookingRequests').post(async(req,res)=>{
 router.route('/transConfirm').post(async(req,res)=>{
   try{
     
-    const{user, pickupcity,dropcity,date,weight,transemail,truckNo,typeofgoods,price,status,transconfirm}=req.body
+    const{user, pickupcity,dropcity,date,weight,transemail,truckNo,typeofgoods,price,transconfirm,status}=req.body
     console.log(req.body.date);
-    await Booking.deleteMany({user, pickupcity,dropcity,date,weight,transemail,truckid:truckNo,typeofgoods,price}).then(res => {console.log(res)});
+    const r = await Booking.findOneAndUpdate({user, pickupcity,dropcity,date,weight,transemail,truckid:truckNo,typeofgoods,price},{$set:{transconfirm:transconfirm,status:status}})
+
+    // await Booking.deleteMany({user, pickupcity,dropcity,date,weight,transemail,truckid:truckNo,typeofgoods,price}).then(res => {console.log(res)});
     // const r = Truck.findOneAndUpdate({number:truckNo},{$set:{status:false}},{new:true});
     const history = new History({user, pickupcity,dropcity,date,weight,transemail,truckNo,typeofgoods,price,status,transconfirm:transconfirm});
     const historyCon = await history.save().then(res => {console.log(res)});   
@@ -348,7 +361,7 @@ router.route('/trans/history').post(async(req,res)=>{
   {
     try{
       const user = req.body.user;
-      const result = await History.find({user : user});
+      const result = await Booking.find({user : user});
       console.log(result);
       res.status(200).json(result);
     }catch(err){
@@ -358,7 +371,7 @@ router.route('/trans/history').post(async(req,res)=>{
   else{
     try{
       const transemail = req.body.transemail;
-      const result = await History.find({transemail : transemail});
+      const result = await Booking.find({transemail : transemail});
       console.log(result);
       res.status(200).json(result);
     }catch(err){
