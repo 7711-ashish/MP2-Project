@@ -71,7 +71,7 @@ const TruckBooking = ({ history }) => {
                                 <div className="col-lg-12">
                                     <ul className="nav md-pills nav-justified pills-primary font-weight-bold">
                                         <li className="nav-item">
-                                            <a className="nav-link active" data-toggle="tab" href="#tabCheckoutBilling123" role="tab">1. Billing</a>
+                                            <a className="nav-link active" data-toggle="tab" href="#tabCheckoutBilling123" role="tab"></a>
                                         </li>
                                     </ul>
                                     <div className="tab-content pt-4">
@@ -81,7 +81,7 @@ const TruckBooking = ({ history }) => {
                                                     <div className="col-md-6 mb-4">
                                                     <label htmlFor="state">PICK UP CITY</label>
                                                         <select className="custom-select d-block w-100"value={user.pickupcity}name="pickupcity" onChange={e => handleChangeEvent(e)} id="state"required>
-                                                            <option>--Choose State--</option>
+                                                            <option>--Choose City--</option>
                                                             {Options.map((e, key) => {
                                                                     return <option key={key}>{e.name}</option>;
                                                             })}
@@ -91,7 +91,7 @@ const TruckBooking = ({ history }) => {
                                                     <div className="col-md-6 mb-2">
                                                     <label htmlFor="state">DROP CITY</label>
                                                         <select className="custom-select d-block w-100"value={user.dropcity}name="dropcity" onChange={e => handleChangeEvent(e)} id="state"required>
-                                                            <option>--Choose State--</option>
+                                                            <option>--Choose City--</option>
                                                             {Options.map((e, key) => {
                                                                     return <option key={key}>{e.name}</option>;
                                                             })}
@@ -102,7 +102,7 @@ const TruckBooking = ({ history }) => {
                                                     <div className="col-lg-6 col-md-12 mb-4">
                                                         <label htmlFor="good">TYPE OF GOODS</label>
                                                         <select className="custom-select d-block w-100"value={user.typeofgoods}name="typeofgoods" onChange={e => handleChangeEvent(e)} id="good"required>
-                                                            <option>--Choose State--</option>
+                                                            <option>--Choose good--</option>
                                                             {goods.map((e, key) => {
                                                                     return <option key={key}>{e.name}</option>;
                                                             })}
@@ -118,11 +118,11 @@ const TruckBooking = ({ history }) => {
                                                     </div>
                                                 </div>
                                                 <hr />
-                                                <div className="mb-1">
+                                                <div className="mb-1" disabled>
                                                     <input type="checkbox" className="form-check-input filled-in" id="chekboxRules" />
                                                     <label className="form-check-label" htmlFor="chekboxRules" required>I accept the terms and conditions</label>
                                                 </div>
-                                                <div className="mb-1">
+                                                <div className="mb-1" disabled>
                                                     <input type="checkbox" className="form-check-input filled-in" id="safeTheInfo" />
                                                     <label className="form-check-label" htmlFor="safeTheInfo" required>Save this information for next time</label>
                                                 </div>

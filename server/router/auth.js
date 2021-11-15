@@ -285,7 +285,7 @@ router.post("/Transsignin",async(req,res)=>{
         token = await transLogin.generateTransporterAuthToken();
         console.log(token);
   
-        await res.cookie("jwt",token,{
+        res.cookie("jwt",token,{
           expires: new Date(Date.now()+25892000000),
           httpOnly:true
         });
@@ -295,7 +295,7 @@ router.post("/Transsignin",async(req,res)=>{
           res.status(400).json({error : "invalid pass or email"});
         }
         else{
-          sessionStorage.setItem("tr",email);
+          
           res.status(200).json({message : "Login Success", token: token});
         }    
       }else{
