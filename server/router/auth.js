@@ -399,6 +399,17 @@ router.route('/trucks').get(async(req,res)=>{
   }
 })
 
+router.route('/transporterList').get(async(req,res)=>{
+  try{
+    var transporters = await Truck.find();
+    console.log(transporters);
+    res.status(200).json(transporters);
+
+  }catch(err){
+    console.log(err);
+  }
+})
+
 router.route('/logout').get((req,res)=>{
   res.clearCookie('jwt');
   res.status(200).send({"message":"User logout"});

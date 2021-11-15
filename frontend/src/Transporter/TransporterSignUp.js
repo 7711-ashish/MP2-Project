@@ -51,14 +51,14 @@ const TransporterSignup = ({history}) => {
     // submiting data to backend
     const submitData = async(e) => {
         e.preventDefault();
-        const { name, email, phone, company, password} = user;
+        const { name, email, phone, company, password,address} = user;
         const res = await fetch("/registerTransporter", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                name: name, email: email, phone: phone, company: company, password: password, cpassword:password
+                name: name, email: email, phone: phone, company: company, password: password, cpassword:password, address:address
             })
         });
 
@@ -73,16 +73,16 @@ const TransporterSignup = ({history}) => {
     }
 
     return (
-        <div class="container-fluid mt-3 mb-5">
+        <div className="container-fluid stle">
 
-            <section className="stle">
+            <section >
 
                 <div class="mask d-flex justify-content-center align-items-center">
 
                     <div class="container py-5 my-5">
 
                         <h3 class="tl font-weight-bold text-center white-text pb-2">Get Started Free</h3>
-                        <p class="tl lead text-center white-text pt-2 mb-5">Start to explore our product absolutely free.</p>
+                        <p class="tl lead text-center white-text pt-2 mb-5">Start to explore our services.</p>
 
                         <div class="row d-flex align-items-center justify-content-center">
                             <div class="col-md-6 col-xl-5">
@@ -90,45 +90,32 @@ const TransporterSignup = ({history}) => {
                                 <div class="card">
                                     <div class="card-body z-depth-2 px-4">
                                         <div class="md-form mt-3">
-                                            <i class="fa fa-user prefix grey-text"></i>
-                                            <input type="text" id="form3" value={user.name} placeholder="name" name="name" class="form-control" onChange={e => handleChangeEvent(e)} />
-                                            {/* <label for="form3">Your name</label> */}
+                                            <input type="text"  value={user.name} placeholder="name" name="name" class="form-control" onChange={e => handleChangeEvent(e)} />
                                         </div>
                                         <div class="md-form mt-3">
-                                            <i class="fa fa-envelope prefix grey-text"></i>
-                                            <input type="text" id="form2" value={user.email} placeholder="email" name="email" class="form-control" onChange={e => handleChangeEvent(e)} />
-                                            {/* <label for="form2">Your email</label> */}
+                                            <input type="text"  value={user.email} placeholder="email" name="email" class="form-control" onChange={e => handleChangeEvent(e)} />
                                         </div>
                                         <div class="md-form mt-3">
-                                            <i class="fa fa-user prefix grey-text"></i>
-                                            <input type="number" id="form3" value={user.phone} placeholder="phone" name="phone" class="form-control" onChange={e => handleChangeEvent(e)} />
-                                            {/* <label for="form3">Your mobile</label> */}
+                                            <input type="number"  value={user.phone} placeholder="+91 1234567980" name="phone" class="form-control" onChange={e => handleChangeEvent(e)} />
                                         </div>
                                         <div class="md-form mt-3">
-                                            <i class="fas fa-key prefix grey-text"></i>
-                                            <input type="text" id="form4" value={user.company} placeholder="company" name="company" class="form-control" onChange={e=>handleChangeEvent(e)}/>
-                                            {/* <label for="form4">Work</label> */}
+                                            <input type="text"  value={user.company} placeholder="Company Name" name="company" class="form-control" onChange={e=>handleChangeEvent(e)}/>
                                         </div>
                                         <div class="md-form mt-3">
-                                            <i class="fas fa-key prefix grey-text"></i>
-                                            <input type="password" id="form4" value={user.password} placeholder="password" name="password" class="form-control"minlength="8" onChange={e => handleChangeEvent(e)} />
-                                            {/* <label for="form4">Your password</label> */}
+                                            <input type="textarea" placeholder="Address" name="address" class="form-control" onChange={e=> handleChangeEvent(e)}/>
                                         </div>
                                         <div class="md-form mt-3">
-                                            <i class="fas fa-key prefix grey-text"></i>
-                                            <input type="password" id="form4" value={user.cpassword} placeholder="cpassword" name="cpassword" class="form-control"minlength="8" onChange={e => handleChangeEvent(e)} />
-                                            {/* <label for="form4">Confirm password</label> */}
+                                            <input type="password"  value={user.password} placeholder="password" name="password" class="form-control"minlength="8" onChange={e => handleChangeEvent(e)} />
+                                        </div>
+                                        <div class="md-form mt-3">
+                                            <input type="password"  value={user.cpassword} placeholder="cpassword" name="cpassword" class="form-control"minlength="8" onChange={e => handleChangeEvent(e)} />
                                         </div>
                                        
                                         <div class="md-form mt-3">
-                                            <i class="fas fa-key prefix grey-text"></i>
-                                            <input type="text" id="form4" placeholder="gender" name="gender" class="form-control" />
-                                            {/* <label for="form4">Gender</label> */}
+                                            <input type="text"  placeholder="gender" name="gender" class="form-control" />
                                         </div>
                                         <div class="md-form mt-3">
-                                            <i class="fas fa-key prefix grey-text"></i>
-                                            <input type="date" id="form4"placeholder="name" name="name" class="form-control" />
-                                            {/* <label for="form4">Date of Birth</label> */}
+                                            <input type="date" placeholder="name" name="name" class="form-control" />
                                         </div>
                                         <div class="text-center my-3">
                                             <button class="btn btn-indigo btn-block" onClick={e=>{submitData(e)}}>SIGNUP</button>

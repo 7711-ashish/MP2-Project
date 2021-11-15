@@ -1,10 +1,21 @@
-import React,{useState} from 'react';
+import React,{useState,useEffect} from 'react';
 import "../Customer/CustomerSignin.css"
 import Footer from '../Common/Footer';
 const TransporterSignin = ({history}) => {
     let [userData, setUserData] = useState({})
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+
+    useEffect(() => {
+        async function fetchTransporter() {
+            const token = sessionStorage.getItem('transauthToken');
+            const response = sessionStorage.getItem("transauthToken");
+            if(response)
+              history.push(`/transporter/${token}/dashboard`);
+          }
+          fetchTransporter();
+    }, [])
+
 
     const getToSignUp = e => {
         e.preventDefault()
@@ -45,7 +56,7 @@ const TransporterSignin = ({history}) => {
             sessionStorage.setItem('transemail',email);
             sessionStorage.setItem('transauthToken', token)
             console.log(data);
-            history.push("/transDash");
+            history.push(`/transporter/${data.token}/dashboard`);
         }
     }
     return (

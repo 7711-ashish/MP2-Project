@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 const CustomerHistory = ({ history }) => {
     const [data, setdata] = useState([]);
     const loadData = async (e) => {
-        // console.log(sessionStorage.getItem('transemail'));
         const email = sessionStorage.getItem('user_email');
         const role = "customer";
         e.preventDefault();

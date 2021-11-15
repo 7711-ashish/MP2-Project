@@ -1,66 +1,84 @@
-import React from 'react';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { useState, useEffect } from 'react';
+import AdminTranslist from './AdminTranslist';
 const AdminDash = () => {
+    const [cntTruck, setTruck] = useState("");
+    const [cntTrans, setTrans] = useState("");
+    const [cntCust, setCust] = useState("");
+    const [transporterList, setTransList] = React.useState([]);
+
+    useEffect(() => {
+        sessionStorage.clear();
+        console.log(sessionStorage.getItem('authtoken'));
+        function count() {
+            fetch('/count', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }).then(res => res.json()).then(data => {
+                setTruck(data.countTruck);
+                setTrans(data.countTransporter);
+                setCust(data.countCustomer);
+            });
+        };
+        function transporterList() {
+            fetch('/transporterList', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }).then(res => res.json()).then(data => {
+                setTransList(data);
+            });
+        }
+        count();
+        transporterList();
+    }, [])
     return (
-        <div class="container my-5">
-            <FontAwesomeIcon icon={["fas", "home"]} />
-            <section class="text-center dark-grey-text">
-                <h3 class="font-weight-bold pb-2 mb-4">Our pricing plans</h3>
-                <p class="text-muted w-responsive mx-auto mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Fugit, error amet numquam iure provident voluptate esse quasi, veritatis totam voluptas nostrum quisquam
-                    eum porro a pariatur veniam.</p>
-                <div class="row">
-                    <div class="col-lg-4 col-md-12 mb-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="mb-4">Basic plan</h5>
-                                <div class="d-flex justify-content-center">
-                                    <div class="card-circle d-flex justify-content-center align-items-center">
-                                    
-                                    </div>
-                                </div>
-                                <h2 class="font-weight-bold my-4">59$</h2>
-                                <p class="grey-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa pariatur id
-                                    nobis accusamus deleniti cumque hic laborum.</p>
-                                <a class="btn btn-indigo btn-rounded">Buy now</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="card indigo">
-                            <div class="card-body white-text">
-                                <h5 class="mb-4">Premium plan</h5>
-                                <div class="d-flex justify-content-center">
-                                    <div class="card-circle d-flex justify-content-center align-items-center">
-                                        <i class="fas fa-users"></i>
-                                    </div>
-                                </div>
-                                <h2 class="font-weight-bold my-4">79$</h2>
-                                <p>Esse corporis saepe laudantium velit adipisci cumque iste ratione facere non distinctio cupiditate
-                                    sequi atque.</p>
-                                <a class="btn btn-outline-white btn-rounded">Buy now</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="mb-4">Advanced plan</h5>
-                                <div class="d-flex justify-content-center">
-                                    <div class="card-circle d-flex justify-content-center align-items-center">
-                                        <i class="fas fa-chart-line indigo-text"></i>
-                                    </div>
-                                </div>
-                                <h2 class="font-weight-bold my-4">99$</h2>
-                                <p class="grey-text">At ab ea a molestiae corrupti numquam quo beatae minima ratione magni
-                                    accusantium repellat eveniet quia vitae.</p>
-                                <a class="btn btn-indigo btn-rounded">Buy now</a>
-                            </div>
-                        </div>
+        <>
+            <nav className="navbar navbar-expand-lg navbar-light bg-col mb-4 bg-unique hm-gradient">
+                <div className="container-fluid">
+                    <strong><a className="navbar-brand" to="#">FREIGTHCENTRAL</a></strong>
+                    <div className="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul className="navbar-nav ml-lg-2 mb-2 mb-lg-0">
+
+                            <li className="nav-item">
+                                <a className="nav-link" href="#login">SignOut</a>
+                            </li>
+                        </ul>
                     </div>
                 </div>
-            </section>
-        </div>
+            </nav>
+            <div class="container my-5">
+                <div className="container row">
+                    <div class="col-4 mb-4">
+                        <a class="card hoverable">
+                            <div class="card-body my-4">
+                                <h1>{cntTruck}</h1>
+                                <h5 class="black-text mb-0">REGISTERED TRUCKS</h5>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-4 mb-4">
+                        <a class="card hoverable">
+                            <div class="card-body my-4">
+                                <h1>{cntTrans}</h1>
+                                <h5 class="black-text mb-0">REGISTERED TRANSPORTER</h5>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-4 mb-4">
+                        <a class="card hoverable">
+                            <div class="card-body my-4">
+                                <h1>{cntCust}</h1>
+                                <h5 class="black-text mb-0">REGISTERED CUSTOMERS</h5>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+               <AdminTranslist/>
+            </div>
+        </>
     )
 }
 

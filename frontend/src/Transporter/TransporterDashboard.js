@@ -3,14 +3,14 @@ import './trans.css'
 const CustomerDashboard = ({history}) => {
 
     useEffect(() => {
-        async function fetchCustomer() {
+        async function fetchTransporter() {
             const response = sessionStorage.getItem("transauthToken");
             if(response)
               window.alert("WELCOME");
             else
               history.push("/transsignin")
           }
-          fetchCustomer();
+          fetchTransporter();
     }, [])
 
 
@@ -63,7 +63,7 @@ const CustomerDashboard = ({history}) => {
                 </div>
             </nav>
             <div class="container my-5" id="login">
-
+                
                 <section class="dark-grey-text text-center">
                     <h3 class="font-weight-bold black-text card-back mb-4 pb-2">CHOOSE OPTION</h3>
                     <hr class="w-header"/>

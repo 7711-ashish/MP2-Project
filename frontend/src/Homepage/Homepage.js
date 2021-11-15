@@ -85,7 +85,7 @@ const Homepage = ({history}) => {
                         <div class="col-md-5 d-flex align-items-center">
                             <div>
 
-                                <h3 class="font-weight-bold mb-4"> WELCOME TO CENTRAL TRANSPORT</h3>
+                                <h3 class="font-weight-bold mb-4"> WELCOME TO FREIGTHCENTRAL TRANSPORT</h3>
 
                                 <p>Central transport is portal for transport industry, connecting transporters,truck drivers,customers. Simplicity speed and efficiency drive your business and this is our focus. We allow users information for better rates and vehicles.We provide information to registered user about availablity of loads and vehicles</p>
 

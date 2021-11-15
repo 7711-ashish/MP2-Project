@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Homepage from "./Homepage/Homepage";
 import CustomerSignin from './Customer/CustomerSignin';
-import Contact from './Common/Contact'
+import Contact from './Common/Contact';
 import RegisterPage from './Common/RegisterPage';
 import CustomerDashboard from './Customer/CustomerDashBoard';
 import TransporterDashboard from './Transporter/TransporterDashboard';
@@ -21,6 +21,7 @@ import TransporterTruckList from './Transporter/TransporterTruckList';
 import BookingRequest from './Transporter/BookingRequest';
 import Update from './Transporter/Update';
 import TruckDetails from './Transporter/TruckDetails';
+import AdminDash from './Admin/AdminDash';
 function App() {
   return (
     <div className="App">
@@ -28,6 +29,7 @@ function App() {
       <Router>
         <Switch>
           <Route path="/" exact render={props => <Homepage {...props} />} />
+          <Route path="/admin" render={props=><AdminDash {...props}/>}/>
           <Route path="/Contact" render={props => <Contact {...props} />} />
           <Route path="/Customersignin" render={props => <CustomerSignin {...props} />} />
           <Route path="/transSignin" render={props => <TransporterSignin {...props} />} />
@@ -36,7 +38,7 @@ function App() {
           <Route path="/customerSignup" render={props =><CustomerSignup {...props}/>}/>
           <Route path="/TransporterSignup" render={props =><TransporterSignup {...props}/>}/>
           <Route path="/customerDash" render={props => <CustomerDashboard {...props} />} />
-          <Route path="/transDash" render={props => <TransporterDashboard {...props} />} />
+          <Route path="/transporter/:id/dashboard" render={props => <TransporterDashboard {...props} />} />
           <Route path="/registerTruck" render={props => <RegisterTruck {...props} />} />
           <Route path="/customer/payment" render={props => <Pay {...props}/>} />
           <Route path="/transporteTruckList" render={props => <TransporterTruckList {...props} />} />

@@ -2,6 +2,9 @@
     background-image: url('https://mdbootstrap.com/img/Photos/Others/images/90.jpg'); 
     background-repeat: no-repeat; background-size: cover;
     background-position: center center;}
-.tl{
-    color: bisque;
-}
+    .tl{
+        color: bisque;
+    }
+    td{
+        width: 800px;
+    }
