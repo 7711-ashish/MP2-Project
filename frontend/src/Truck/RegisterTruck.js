@@ -35,18 +35,45 @@ const RegisterTruck=({ history })=> {
             window.alert("Invalid Registration");
         } else {
             window.alert("Success");
-            history.push("/transDash");
+            history.goback();
         }
         // window.alert("Added success");
         // history.push('/transDash')
     }
-
+    const handleSignout=(e)=>{
+        console.log(sessionStorage.getItem('transemail'));
+        e.preventDefault();
+        sessionStorage.clear()
+        history.push('/')
+    }
+    const handleDash=(e)=>{
+        e.preventDefault();
+        const tok = sessionStorage.getItem('transauthToken');
+        history.push(`/transporter/${tok}/dashboard`)
+    }
 
 
 
     return (
         <>
-        <Navbar/>
+        <nav className="navbar navbar-expand-lg navbar-light bg-col mb-4 bg-unique hm-gradient">
+                <div className="container-fluid">
+                    <a className="navbar-brand" to="#">FREIGHT-CENTRAL</a>
+                    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span className="navbar-toggler-icon"></span>
+                    </button>
+                    <div className="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul className="navbar-nav ml-lg-4 mb-2 mb-lg-0">
+                            <li className="nav-item active">
+                                <a className="nav-link active" aria-current="page" onClick={e=>{handleDash(e)}}>DashBoard</a>
+                            </li>
+                            <li className="nav-item">   
+                                <a className="nav-link" onClick={e=>{handleSignout(e)}}>SignOut</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
         <div className="container">
             <div className="flex-container">
                 <div className="row full">

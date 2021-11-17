@@ -37,14 +37,45 @@ const BookingRequest = ({ history }) => {
             window.alert(data.message);
         })
     }
+    const handleSignout=(e)=>{
+        console.log(sessionStorage.getItem('transemail'));
+        e.preventDefault();
+        sessionStorage.clear()
+        history.push('/')
+    }
+    const handleDash=(e)=>{
+        const tok = sessionStorage.getItem('transauthToken');
+        history.push(`/transporter/${tok}/dashboard`)
+    }
 
 
     return (
-        <div className="container">
+        <div className="">
+            <nav className="navbar navbar-expand-lg navbar-light bg-col mb-4 bg-unique hm-gradient">
+                <div className="container-fluid">
+                    <a className="navbar-brand" to="#">FREIGHT-CENTRAL</a>
+                    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span className="navbar-toggler-icon"></span>
+                    </button>
+                    <div className="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul className="navbar-nav  mb-2 mb-lg-0">
+                            <li className="nav-item active">
+                                <a className="nav-link active" aria-current="page" onClick={e=>{handleDash(e)}}>DashBoard</a>
+                            </li>
+                            <li className="nav-item">   
+                                <a className="nav-link" onClick={e=>{handleSignout(e)}}>SignOut</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
             <button onClick={e=>{loadData(e)}} className="btn btn-lg btn-primary mt-4 my-4">CLICK HERE TO SHOW LIST</button>
         {
-        data.err?<h1>{data.err}</h1>:data.map((truck,idx) => (
-            <section className="card mb-2" key={idx}>
+         data.err?  
+         <div className="alert alert-danger">
+         <h1>{data.err}</h1>
+         </div>:data.map((truck,idx) => (
+            <section className="card mb-2 container" key={idx}>
                 <div className="table-responsive">
                     <table className="table product-table table-cart-v-1">
                         <thead>

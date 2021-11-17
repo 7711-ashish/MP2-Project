@@ -1,24 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 const History = ({ history }) => {
-    const [data, setdata] = useState([]);
-    const loadData = async (e) => {
-        // console.log(sessionStorage.getItem('transemail'));
-        const email = sessionStorage.getItem('transemail');
-        e.preventDefault();
-        await fetch("/trans/history", {
-            method: "POST",
-            headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                transemail: email
-            })
+    const [data, setdata] = useState([""]);
+    useEffect(() => {
+        const loadData = async (e) => {
+            const email = sessionStorage.getItem('transemail');
+            const role = "transporter";
+            await fetch("/trans/history", {
+                method: "POST",
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    transemail: email,role
+                })
+            }
+            ).then(res => res.json()).then(data =>{setdata(data)});
+            data.reverse()
         }
-        ).then(res => res.json()).then(data =>{setdata(data)});
-        // data.sort((a, b) => (a.date > b.date) ? 1 : -1);
-
-    }
+        loadData();
+    },[])
 
 //     const handleDiliverd=(e,truck)=>{
 //         e.preventDefault();
@@ -34,13 +35,41 @@ const History = ({ history }) => {
 
 //     })
 // }
+const handleSignout=(e)=>{
+    console.log(sessionStorage.getItem('transemail'));
+    e.preventDefault();
+    sessionStorage.clear()
+    history.push('/')
+}
+const handleDash=(e)=>{
+    const tok = sessionStorage.getItem('transauthToken');
+    history.push(`/transporter/${tok}/dashboard`)
+}
     return (
 
-        <div className="container">
-            <button onClick={e=>{loadData(e)}} className="btn btn-primary mt-4 my-4">SHOW</button>
+        <div className="">
+            <nav className="navbar navbar-expand-lg navbar-light bg-col mb-4 bg-unique hm-gradient">
+                <div className="container-fluid">
+                    <a className="navbar-brand" to="#">FREIGHT-CENTRAL</a>
+                    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span className="navbar-toggler-icon"></span>
+                    </button>
+                    <div className="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul className="navbar-nav  mb-2 mb-lg-0">
+                            <li className="nav-item active">
+                                <a className="nav-link active" aria-current="page" onClick={e=>{handleDash(e)}}>DashBoard</a>
+                            </li>
+                            <li className="nav-item active">   
+                                <a className="nav-link" onClick={e=>{handleSignout(e)}}>SignOut</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            {/* <button onClick={e=>{loadData(e)}} className="btn btn-primary mt-4 my-4">SHOW</button> */}
         {
         data.map(truck => (
-            <section className="card mb-4">
+            <section className="card mb-4 container">
                 <div className="table-responsive">
                     <table className="table product-table table-cart-v-1">
                         <thead>
@@ -92,10 +121,9 @@ const History = ({ history }) => {
                             </tr>
                         </tbody>
                     </table>
-                    <div>
-                        {truck.transconfirm?<button className="btn btn-success col-lg-4" disabled>CONFIRMED</button>:<button className="btn btn-danger">CANCELED</button>}
-                        {truck.transconfirm&&truck.status?<button className="btn btn-success col-lg-4 ml-2" >DELIVERED</button>:<></>}
-                    </div>
+                        {truck.transconfirm?<button className="ml-4 btn btn-success col-lg-4" disabled>CONFIRMED</button>:<button className="btn btn-danger">CANCELED</button>}
+                        {truck.transconfirm&&truck.status?<button className="btn btn-success col-lg-4 ml-4" >DELIVERED</button>:<></>}
+                    
                 </div>
             </section>
         )

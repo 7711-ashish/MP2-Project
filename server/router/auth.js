@@ -153,6 +153,9 @@ router.route("/trucklist").post(async(req,res)=>{
   }
   try{
     const truckList = await Truck.find({transemail:transemail});
+    if(truckList.length == 0){
+      res.json({message:"No Truck Found"});
+    }
     console.log(truckList);
     res.json(truckList);
   }catch(err){

@@ -1,24 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import "./TransporterSignUp.css"
+import Footer from '../Common/Footer';
 
 const TransporterTruckList = ({ history }) => {
-    const [data, setdata] = useState([]);
-    const loadData = async (e) => {
-        console.log(sessionStorage.getItem('transemail'));
-        // e.preventDefault();
-        const res = await fetch("/trucklist", {
-            method: "POST",
-            headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                transemail: sessionStorage.getItem("transemail")
-            })
+    const [data, setdata] = useState([""]);
+    
+    useEffect(() => {
+        const loadData = async (e) => {
+            console.log(sessionStorage.getItem('transemail'));
+            // e.preventDefault();
+            const res = await fetch("/trucklist", {
+                method: "POST",
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    transemail: sessionStorage.getItem("transemail")
+                })
+            }
+            ).then(res => res.json()).then(data =>{setdata(data)});
+    
         }
-        ).then(res => res.json()).then(data =>{setdata(data)});
-
-    }
+        loadData();
+    },[])
   
     // useEffect(() => {
     //     loadData();
@@ -57,28 +62,56 @@ const TransporterTruckList = ({ history }) => {
             })
         }).then(res => res.json()).then(data =>{window.alert(data)});
     }
+    const handleSignout=(e)=>{
+        console.log(sessionStorage.getItem('transemail'));
+        e.preventDefault();
+        sessionStorage.clear()
+        history.push('/')
+    }
 
     return (
-        <div className="container">
-            <button onClick={e=>{loadData(e)}} className="btn btn-primary mt-4 my-4">SHOW</button>
+        <div>
+            <nav className="navbar navbar-expand-lg navbar-light bg-col mb-4 bg-unique hm-gradient">
+                <div className="container-fluid">
+                    <a className="navbar-brand" to="#">CENTRAL</a>
+                    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span className="navbar-toggler-icon"></span>
+                    </button>
+                    <div className="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul className="navbar-nav ml-lg-4 mb-2 mb-lg-0">
+                            <li className="nav-item active">
+                                <a className="nav-link active" aria-current="page" to="/">Home</a>
+                            </li>
+                            <li className="nav-item">
+                                <a className="nav-link" onClick={e=>{handleSignout(e)}}>SignOut</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <div className="container">
         {
+        data.message=== "No Truck Found"?
+        <div className="alert alert-danger">
+        <h1>NO TRUCK REGISTERED</h1>:
+        </div>:
         data.map((truck ,idx)=> (
             <section className="card" key={idx}>
                 <div className="table-responsive">
-                    <table className="table product-table table-cart-v-1">
+                    <table className="table">
                         <thead>
                             <tr>
-                                <th className="font-weight-bold">
+                                <th >
                                     <strong>TRUCK NUMBER</strong>
                                 </th>
-                                <th className="font-weight-bold">
+                                <th>
                                     <strong>Company</strong>
                                 </th>
                                
-                                <th className="font-weight-bold">
+                                <th>
                                     <strong>Price</strong>
                                 </th>
-                                <th className="font-weight-bold">
+                                <th >
                                     <strong>Capacity</strong>
                                 </th>
                                 <th></th>
@@ -104,7 +137,7 @@ const TransporterTruckList = ({ history }) => {
                                     <button type="button" className="btn btn-sm btn-danger" data-toggle="tooltip" data-placement="top"
                                         title="BOOK NOW" onClick={e=>handleDelete(e,truck)}>DELETE
                                     </button>
-                                    <button type="button" className="btn btn-sm btn-primary mt-2" data-toggle="tooltip" data-placement="top"
+                                    <button type="button" className="btn btn-sm btn-primary mt-2 ml-2" data-toggle="tooltip" data-placement="top"
                                         title="DETAILS" onClick={e=>handleDetails(e,truck)}>DETAILS
                                     </button>
                                 </td>
@@ -117,7 +150,7 @@ const TransporterTruckList = ({ history }) => {
         )
         )
         }
-        
+        </div>
         </div>
     );
 }

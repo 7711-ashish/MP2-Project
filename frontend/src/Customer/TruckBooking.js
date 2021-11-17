@@ -8,13 +8,6 @@ const TruckBooking = ({ history }) => {
     const [trucks, setTruck] = useState([]);
 
     const [load, setLoad] = useState();
-
-    const handleLoad=(e)=>{
-        e.preventDefault();
-        setLoad(e.target.value);
-        console.log(load);
-    }
-    
     const [user, setUser] = useState({
         pickupcity: "", dropcity: "", capacitty: "",typeofgoods:""
     });
@@ -38,7 +31,6 @@ const TruckBooking = ({ history }) => {
                 pickupcity: pickupcity, dropcity: dropcity, capacitty: capacitty
             })
         }).then(res => res.json()).then(data => {setTruck(data)});
-        trucks.sort((a, b) => (a.price < b.price) ? 1 : -1);
         // console.log(trucks);
         // history.push('/customerDash');
     }
@@ -57,11 +49,47 @@ const TruckBooking = ({ history }) => {
         localStorage.setItem('load',load);
         history.push('/customer/payment');
     }
+    const handleSignout=async(e)=>{
+        e.preventDefault();
+        const res= await fetch("/logout", {
+            method: "GET",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json"
+            },  
+            credentials : "include"
+        });
+        console.log(res.status)
+        console.log(await res.json())
+        console.log(sessionStorage.getItem('authToken'))
+        history.push("/Customersignin")
+        sessionStorage.clear();
+        sessionStorage.removeItem('authToken')
+        console.log(sessionStorage.getItem('authToken'))
+        
+    }
 
 
     return (
         <>
-            <Navbar />
+            <nav className="navbar navbar-expand-lg navbar-light bg-col mb-4 bg-unique hm-gradient">
+                <div className="container-fluid">
+                    <a className="navbar-brand" to="#">CENTRAL</a>
+                    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span className="navbar-toggler-icon"></span>
+                    </button>
+                    <div className="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul className="navbar-nav ml-lg-4 mb-2 mb-lg-0">
+                            <li className="nav-item active">
+                                <a className="nav-link active" aria-current="page" to="/">Home</a>
+                            </li>
+                            <li className="nav-item">
+                                <a className="nav-link" onClick={e=>{handleSignout(e)}}>SignOut</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
             <div className="container mt-5">
                 <section className="dark-grey-text">
 
@@ -117,7 +145,7 @@ const TruckBooking = ({ history }) => {
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <hr />
+                                                {/* <hr />
                                                 <div className="mb-1" disabled>
                                                     <input type="checkbox" className="form-check-input filled-in" id="chekboxRules" />
                                                     <label className="form-check-label" htmlFor="chekboxRules" required>I accept the terms and conditions</label>
@@ -126,7 +154,7 @@ const TruckBooking = ({ history }) => {
                                                     <input type="checkbox" className="form-check-input filled-in" id="safeTheInfo" />
                                                     <label className="form-check-label" htmlFor="safeTheInfo" required>Save this information for next time</label>
                                                 </div>
-                                                <hr />
+                                                <hr /> */}
                                             </form>
                                         </div>
                                     </div>

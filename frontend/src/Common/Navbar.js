@@ -11,7 +11,7 @@ const Navbar = () => {
         <>
             <nav className="navbar navbar-expand-lg navbar-light bg-col mb-4 bg-unique hm-gradient">
                 <div className="container-fluid">
-                    <strong><a className="navbar-brand" to="#">FREIGTHCENTRAL</a></strong>
+                    <strong><a className="navbar-brand" to="#">FREIGHT-CENTRAL</a></strong>
                     {/* <button className="navbar-toggler" type="button" data-toggle="collapse"data-target="#navbarSupprtedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
                     </button> */}

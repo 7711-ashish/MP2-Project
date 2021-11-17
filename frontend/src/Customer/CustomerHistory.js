@@ -1,26 +1,67 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 const CustomerHistory = ({ history }) => {
-    const [data, setdata] = useState([]);
-    const loadData = async (e) => {
-        const email = sessionStorage.getItem('user_email');
-        const role = "customer";
+    const [data, setdata] = useState([""]);
+    
+    useEffect(() => {
+        const loadData = async (e) => {
+            const email = sessionStorage.getItem('user_email');
+            const role = "customer";
+            await fetch("/trans/history", {
+                method: "POST",
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    user: email,role
+                })
+            }
+            ).then(res => res.json()).then(data =>{setdata(data)});
+            data.reverse()
+        }
+        loadData();
+    },[])
+    const handleSignout=async(e)=>{
         e.preventDefault();
-        await fetch("/trans/history", {
-            method: "POST",
+        const res= await fetch("/logout", {
+            method: "GET",
             headers: {
                 Accept: "application/json",
                 "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                user: email,role
-            })
-        }
-        ).then(res => res.json()).then(data =>{setdata(data)});
-        data.reverse()
+            },  
+            credentials : "include"
+        });
+        console.log(res.status)
+        console.log(await res.json())
+        console.log(sessionStorage.getItem('authToken'))
+        history.push("/Customersignin")
+        sessionStorage.clear();
+        sessionStorage.removeItem('authToken')
+        console.log(sessionStorage.getItem('authToken'))
+        
     }
     return (
+        <>
+        <nav className="navbar navbar-expand-lg navbar-light bg-col mb-4 bg-unique hm-gradient">
+                <div className="container-fluid">
+                    <a className="navbar-brand" to="#">CENTRAL</a>
+                    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span className="navbar-toggler-icon"></span>
+                    </button>
+                    <div className="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul className="navbar-nav ml-lg-4 mb-2 mb-lg-0">
+                            <li className="nav-item active">
+                                <a className="nav-link active" aria-current="page" to="/">Home</a>
+                            </li>
+                            <li className="nav-item">
+                                <a className="nav-link" onClick={e=>{handleSignout(e)}}>SignOut</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
         <div className="container">
-            <button onClick={e=>{loadData(e)}} className="btn btn-lg btn-primary mt-4 my-4">CLICK HERE TO SHOW HISTORY</button>
+            
         {
         data.map(truck => (
             <section className="card mb-4">
@@ -28,7 +69,6 @@ const CustomerHistory = ({ history }) => {
                     <table className="table product-table table-cart-v-1">
                         <thead>
                             <tr>
-
                                 <th className="font-weight-bold">
                                     <strong>PICKUP CITY</strong>
                                 </th>
@@ -84,7 +124,9 @@ const CustomerHistory = ({ history }) => {
         )
         }
         </div>
+    </>  
     );
+    
 }
 
 export default CustomerHistory;

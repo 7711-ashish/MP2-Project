@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 // import {history} from 'react-history';
 import Navbar from '../Common/Navbar';
 import Footer from '../Common/Footer';
+import "./homepage.css"
 // import Contact from '../Common/Contact';
 // import CustomerSignin from '../Customer/CustomerSignin';
 const Homepage = ({history}) => {
@@ -78,14 +79,14 @@ const Homepage = ({history}) => {
                         <div class="col-md-7 mb-4">
 
                             <div class="view">
-                                <img src="https://ih1.redbubble.net/image.14986654.6002/flat,1000x1000,075,f.u4.jpg" class="img-fluid" alt="smaple image" />
+                                <img src="https://clockwise.software/img/blog/how-to-build-an-app-like-uber-for-trucks/header-background.png" class="img-fluid" alt="smaple image" />
                             </div>
 
                         </div>
                         <div class="col-md-5 d-flex align-items-center">
                             <div>
 
-                                <h3 class="font-weight-bold mb-4"> WELCOME TO FREIGTHCENTRAL TRANSPORT</h3>
+                                <h3 class="font-weight-bold mb-4"> WELCOME TO FREIGHT-CENTRAL TRANSPORT</h3>
 
                                 <p>Central transport is portal for transport industry, connecting transporters,truck drivers,customers. Simplicity speed and efficiency drive your business and this is our focus. We allow users information for better rates and vehicles.We provide information to registered user about availablity of loads and vehicles</p>
 
@@ -119,20 +120,18 @@ const Homepage = ({history}) => {
                     </a>
                     </div> */}
                     <div class ="col-md-6 mb-4">
-                    <a onClick={e=>{handleCustomer(e)}} class ="card hoverable">
+                    <p onClick={e=>{handleCustomer(e)}} class ="card hoverable btn-primary">
                         <div class ="card-body my-4">
-                            <p><i class ="fas fa-cogs fa-2x text-muted"></i></p>
-                            <h5 class ="black-text mb-0">CUSTOMER</h5>
+                            <h5 class ="mb-0" style={{"color":"black"}}>CUSTOMER</h5>
                         </div>
-                    </a>
+                    </p>
                     </div>
                     <div class ="col-md-6 mb-4">
-                    <a onClick={e=>{handleTransporter(e)}} class ="card hoverable">
+                    <p onClick={e=>{handleTransporter(e)}} class ="card hoverable btn-primary">
                         <div class ="card-body my-4">
-                            <p><i class ="fas fa-pencil-ruler fa-2x text-muted"></i></p>
-                            <h5 class ="black-text mb-0">TRANSPORTER</h5>
+                            <h5 class =" mb-0" style={{"color":"black"}}>TRANSPORTER</h5>
                         </div>
-                    </a>
+                    </p>
                     </div>
                     {/* <div class ="col-md-3 mb-4">
                     <a href="#!" class ="card hoverable">

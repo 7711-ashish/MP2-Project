@@ -24,8 +24,7 @@ import TruckDetails from './Transporter/TruckDetails';
 import AdminDash from './Admin/AdminDash';
 function App() {
   return (
-    <div className="App">
-      <div className="App">
+     <div class="App">
       <Router>
         <Switch>
           <Route path="/" exact render={props => <Homepage {...props} />} />
@@ -50,7 +49,6 @@ function App() {
           <Route path="/customer/history" render={props => <CustomerHistory {...props} />} />
         </Switch>
       </Router>
-    </div>
     </div>
   );
 }
