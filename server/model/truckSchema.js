@@ -26,6 +26,10 @@ const truckSchema = new mongoose.Schema({
       type: Number,
       required: true
   },
+  typeoftruck:{
+    type: String,
+    required : true
+  },
   status:{
       type: Boolean,
       required: true

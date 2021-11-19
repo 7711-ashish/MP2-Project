@@ -1,7 +1,7 @@
 import React from 'react';
 const AdminTranslist = ({ props }) => {
-    const transporterList = props;
-    console.log(transporterList);
+    const customerList = props;
+    console.log(customerList);
 
     return (
         <section >
@@ -9,20 +9,20 @@ const AdminTranslist = ({ props }) => {
                 <thead class="thead-dark">
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">COMPANY</th>
-                        <th scope="col">NAME</th>
-                        <th scope="col">EMAIL</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Work</th>
                         <th scope="col">PHONE</th>
                     </tr>
                 </thead>
-                {transporterList.map((transporter, index) => {
+                {customerList.map((transporter, index) => {
                     return (
                         <tbody>
                             <tr>
                                 <th scope="row">{index + 1}</th>
-                                <td>{transporter.company}</td>
                                 <td>{transporter.name}</td>
                                 <td>{transporter.email}</td>
+                                <td>{transporter.work}</td>
                                 <td>{transporter.phone}</td>
                             </tr>
                         </tbody>

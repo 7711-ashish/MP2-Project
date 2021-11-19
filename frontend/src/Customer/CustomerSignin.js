@@ -5,8 +5,8 @@ const CustomerSignin = ({history}) => {
     useEffect(() => {
         async function fetchCustomer() {
           const response = sessionStorage.getItem("authToken");
-          if(response)
-            sessionStorage.clear();
+          if(response){
+          history.push(`/customer/${response}/dashboard`);}
         }
         fetchCustomer();
       }, []);
@@ -48,7 +48,7 @@ const CustomerSignin = ({history}) => {
             sessionStorage.setItem("user_email",email);
             sessionStorage.setItem('authToken', token)
             console.log(sessionStorage.getItem('authToken'));
-            history.push("/customerDash");
+            history.push(`/customer/${token}/dashboard`);
         }
     }
     const handleCont=()=>{

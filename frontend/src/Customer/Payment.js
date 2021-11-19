@@ -19,6 +19,7 @@ const Payment = React.forwardRef((props, ref) => {
         const adminemail = localStorage.getItem('adminemail');
         const truckid = localStorage.getItem('truckId');
         const typeofgoods = localStorage.getItem('typeofgoods');
+        const typeoftruck = localStorage.getItem('typeoftruck');
         console.log(typeofgoods);
         fetch('/booking',{
             method: "POST",
@@ -99,7 +100,8 @@ const Payment = React.forwardRef((props, ref) => {
             <button type="submit" className="btn btn-primary m-lg-4 col-lg-6" onClick={e=>handleConfirm(e)}>CONFIRM</button>
             <button type="submit" className="btn btn-primary m-lg-4 col-lg-6" onClick={e=>handleCancel(e)}>CANCLE</button>
         </div>
-    </form>)
+    </form>
+    )
 });
 
 export default Payment;

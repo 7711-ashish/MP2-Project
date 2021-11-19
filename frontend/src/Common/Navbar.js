@@ -7,27 +7,36 @@ const Navbar = () => {
     const handleCont=()=>{
         history.push('./Contact')
     }
+    const handleHome=()=>{
+        history.push('./')
+    }
+    const handleRegi=()=>{
+        history.push('./register')
+    }
+    const handleAbout=()=>{
+        history.push('./AboutUs')
+    }
     return (
         <>
             <nav className="navbar navbar-expand-lg navbar-light bg-col mb-4 bg-unique hm-gradient">
                 <div className="container-fluid">
                     <strong><a className="navbar-brand" to="#">FREIGHT-CENTRAL</a></strong>
-                    {/* <button className="navbar-toggler" type="button" data-toggle="collapse"data-target="#navbarSupprtedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <button className="navbar-toggler" type="button" data-toggle="collapse"data-target="#navbarSupprtedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
-                    </button> */}
+                    </button>
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul className="navbar-nav ml-lg-2 mb-2 mb-lg-0">
-                            <li className="nav-item active">
-                                <a className="nav-link active" aria-current="page" to="/">Home</a>
+                        <ul className="navbar-nav mb-2 ">
+                            <li className="nav-item">
+                                <a className="nav-link" onClick={e=>handleHome()}>Home</a>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link" to="/about">About</a>
+                                <a className="nav-link" onClick={e=>handleAbout()}>About</a>
                             </li>
                             <li className="nav-item">
                                 <a className="nav-link" onClick={e=>handleCont()}>Contact</a>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link" href="#login">Signin/Up</a>
+                                <a className="nav-link"onClick={e=>handleRegi()}>SignUp</a>
                             </li>
                         </ul>
                     </div>

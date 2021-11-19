@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Navbar from '../Common/Navbar'
 import './Addtruck.css'
 import Options from '../Common/Options'
+import typeoftruck from '../Common/truckTypes'
 const RegisterTruck=({ history })=> {
     let transemail = sessionStorage.getItem('transemail');
     const [user, setUser] = useState({
@@ -18,14 +19,14 @@ const RegisterTruck=({ history })=> {
     // submiting data to backend
     const submitData =async(e) => {
         e.preventDefault();
-        const { name,number,pickupcity,dropcity,company,capacitty,price} = user;
+        const { name,number,pickupcity,dropcity,typeoftruck,company,capacitty,price} = user;
         const res = await fetch("/addTruck", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                name: name, number: number,pickupcity:pickupcity,dropcity:dropcity,company:company,capacitty:capacitty,transemail:transemail,price:price
+                name: name, number: number,pickupcity:pickupcity,dropcity:dropcity,company:company,capacitty:capacitty,typeoftruck:typeoftruck,transemail:transemail,price:price
             })
         });
 
@@ -127,6 +128,14 @@ const RegisterTruck=({ history })=> {
                                                             <option>--Choose State--</option>
                                                             {Options.map((e, key) => {
                                                                     return <option key={key}>{e.name}</option>;
+                                                            })}
+                                                        </select>
+
+                                                        <label htmlFor="state">Type Of Truck</label>
+                                                        <select className="custom-select d-block w-100"value={user.typeoftruck}name="typeoftruck" onChange={e => handleChangeEvent(e)} id="state"required>
+                                                            <option>--Choose--</option>
+                                                            {typeoftruck.map((e, key) => {
+                                                                    return <option key={key}>{e.types}</option>;
                                                             })}
                                                         </select>
                                             </div>

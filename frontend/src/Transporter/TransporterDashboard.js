@@ -46,9 +46,15 @@ const CustomerDashboard = ({history}) => {
         const tok = sessionStorage.getItem('transauthToken');
         history.push(`/transporter/${tok}/dashboard`)
     }
+    const mystyle = {
+        color: "black",
+        backgroundColor: "lightblue",
+        padding: "10px",
+        fontFamily: "Arial"
+    };
     return (
-        <div className="z-index-10" style={{"background": "white"}}>
-            <nav className="navbar navbar-expand-lg navbar-light bg-col mb-4 bg-unique hm-gradient">
+        <div className="z-index-10" >
+            <nav className="navbar navbar-expand-lg navbar-light bg-col bg-unique hm-gradient">
                 <div className="container-fluid">
                     <a className="navbar-brand" to="#">FREIGHT-CENTRAL</a>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -67,14 +73,14 @@ const CustomerDashboard = ({history}) => {
                 </div>
             </nav>
 
-            <div class="container my-5" id="login">
+            <div style={mystyle}>
                 
-                <section class="dark-grey-text text-center">
-                    <h3 class="font-weight-bold black-text card-back mb-4 pb-2">CHOOSE OPTION</h3>
+                <section className="container">
+                    <h3 class="mb-4 pb-2">CHOOSE OPTION</h3>
                     <hr class="w-header"/>
                     <div class ="row">
                     <div class ="col-md-3 mb-4">
-                    <a onClick={e=>handleTruckReg(e)} class ="card hoverable">
+                    <a onClick={e=>handleTruckReg(e)} class ="card hoverable" style={{"color":"black"}}>
                         <div class ="card-body my-4">
                             <p><i class ="fas fa-tablet-alt fa-2x text-muted"></i></p>
                             <h5 class ="black-text mb-0">Register new Truck</h5>
@@ -108,7 +114,9 @@ const CustomerDashboard = ({history}) => {
                     </div>
                 </section>
 
-              
+                <div className="" style={mystyle}>
+                <img src="https://clockwise.software/img/blog/how-to-build-an-app-like-uber-for-trucks/header-background.png" class="img-fluid" alt="smaple image" />
+            </div>
             </div>
         </div>
 

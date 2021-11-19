@@ -1,6 +1,5 @@
-.cont{
-  background-color: blueviolet;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
+.containerbac{
+  width: 100%;
+  height: 100%;
+  background-color: #e94242;
 }

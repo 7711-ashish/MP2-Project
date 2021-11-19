@@ -3,13 +3,14 @@ import Footer from '../Common/Footer';
 import Navbar from '../Common/Navbar';
 import Options from '../Common/Options';
 import goods from '../Common/goods';
+import truckTypes from '../Common/truckTypes';
 // import CustomerTruckList from '../Truck/CustomerTruckList';
 const TruckBooking = ({ history }) => {
     const [trucks, setTruck] = useState([]);
 
     const [load, setLoad] = useState();
     const [user, setUser] = useState({
-        pickupcity: "", dropcity: "", capacitty: "",typeofgoods:""
+        pickupcity: "", dropcity: "", capacitty: "",typeofgoods:"",typeoftruck:""
     });
     let name, value;
     const handleChangeEvent = (e) => {
@@ -47,6 +48,7 @@ const TruckBooking = ({ history }) => {
         localStorage.setItem('adminemail',truck.transemail);
         localStorage.setItem('typeofgoods',user.typeofgoods);
         localStorage.setItem('load',load);
+        localStorage.setItem('typeoftruck',user.typeoftruck);
         history.push('/customer/payment');
     }
     const handleSignout=async(e)=>{
@@ -68,6 +70,10 @@ const TruckBooking = ({ history }) => {
         console.log(sessionStorage.getItem('authToken'))
         
     }
+    const handleDash=()=>{
+        const tok = sessionStorage.getItem('authToken');
+        history.push('/customer/${tok}/dashboard');
+    }
 
 
     return (
@@ -81,7 +87,7 @@ const TruckBooking = ({ history }) => {
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul className="navbar-nav ml-lg-4 mb-2 mb-lg-0">
                             <li className="nav-item active">
-                                <a className="nav-link active" aria-current="page" to="/">Home</a>
+                                <a className="nav-link active" aria-current="page" to="/" onClick={e=>handleDash()}>Dashboard</a>
                             </li>
                             <li className="nav-item">
                                 <a className="nav-link" onClick={e=>{handleSignout(e)}}>SignOut</a>
@@ -143,6 +149,17 @@ const TruckBooking = ({ history }) => {
                                                         <div className="invalid-feedback">
                                                             WEIGHT In METRIC TONS
                                                         </div>
+                                                    </div>
+                                                </div>
+                                                <div className="row">
+                                                <div className="col-md-6 mb-2">
+                                                    <label htmlFor="state">TYPE OF TRUCK</label>
+                                                        <select className="custom-select d-block w-100"value={user.typeoftruck} name="typeoftruck" onChange={e => handleChangeEvent(e)} id="state"required>
+                                                            <option>--Choose--</option>
+                                                            {truckTypes.map((e, key) => {
+                                                                    return <option key={key}>{e.types}</option>;
+                                                            })}
+                                                        </select>
                                                     </div>
                                                 </div>
                                                 {/* <hr />

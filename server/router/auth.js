@@ -6,6 +6,8 @@ const Authenticate = require("../middleware/authenticate");
 const ObjectId = require('mongodb').ObjectID
 require('../db/conn');
 
+const Admin = require("../model/adminSchema");
+
 const User = require("../model/userSchema");
 
 const Transporter = require("../model/transporterSchema");
@@ -78,7 +80,7 @@ router.route("/register").post(async(req,res)=>{
 });
 
 router.route("/addTruck").post(async(req,res)=>{
-  const{name, number, pickupcity, dropcity, company, capacitty,transemail,price}= req.body; 
+  const{name, number, pickupcity, dropcity, company, capacitty,typeoftruck,transemail,price}= req.body; 
   console.log(req.body.name);
   console.log(req.body.number);
   console.log(req.body.pickupcity);
@@ -96,7 +98,7 @@ router.route("/addTruck").post(async(req,res)=>{
       console.log("truck Exits");
       return res.status(422).json({err:" truck Exists"});
     }else{
-      const truck = new Truck({name, number, pickupcity, dropcity, company,capacitty, status, transemail,price});
+      const truck = new Truck({name, number, pickupcity, dropcity, company,capacitty,typeoftruck, status, transemail,price});
       const truckRegister =  await truck.save();
       console.log('admin Register success');
       console.log(truckRegister);
@@ -236,6 +238,41 @@ router.route("/registerTransporter").post(async(req,res)=>{
 
 
 //login route
+router.post("/admin",async(req,res)=>{
+  try{
+    let token; 
+    const{email,password} = req.body;
+    if(!email){
+      return res.status(400).json({error : "Plz fill the field properly"});
+    }
+    const adminLogin= await Admin.findOne({email : email});
+    if(adminLogin){
+      const isMatch = await bcrypt.compare(password,adminLogin.password);
+      token = await adminLogin.generateAuthToken();
+      console.log(token);
+
+      res.cookie('jwt',token,{
+        expires: new Date(Date.now()+25892000000),
+        httpOnly:true
+      });
+      res.json({token});
+
+      if(!isMatch){
+        return res.status(400).json({error : "invalid pass or email"});
+      }
+      else{
+        return res.status(200).json({message : "Login Success", token: token});
+      }    
+    }else{
+      return res.status(400).json({error : "Invalid credentials"});
+    }
+  
+  }catch(err){
+    console.log(err);
+  }
+})
+
+
 router.post("/signin",async(req,res)=>{
   try{
     let token; 
@@ -243,10 +280,7 @@ router.post("/signin",async(req,res)=>{
     if(!email){
       return res.status(400).json({error : "Plz fill the field properly"});
     }
-
     const userLogin= await User.findOne({email : email});
-    
-
     if(userLogin){
       const isMatch = await bcrypt.compare(password,userLogin.password);
       token = await userLogin.generateAuthToken();
@@ -404,7 +438,18 @@ router.route('/trucks').get(async(req,res)=>{
 
 router.route('/transporterList').get(async(req,res)=>{
   try{
-    var transporters = await Truck.find();
+    var transporters = await Transporter.find();
+    console.log(transporters);
+    res.status(200).json(transporters);
+
+  }catch(err){
+    console.log(err);
+  }
+})
+
+router.route('/customerList').get(async(req,res)=>{
+  try{
+    var transporters = await User.find();
     console.log(transporters);
     res.status(200).json(transporters);
 
