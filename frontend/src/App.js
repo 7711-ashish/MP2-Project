@@ -25,7 +25,7 @@ import AdminDash from './Admin/AdminDash';
 import AboutUs from './Common/AboutUs';
 function App() {
   return (
-     <div class="App">
+     <div className="App">
       <Router>
         <Switch>
           <Route path="/" exact render={props => <Homepage {...props} />} />

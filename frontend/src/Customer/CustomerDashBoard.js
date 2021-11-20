@@ -75,30 +75,30 @@ const CustomerDashboard = ({history}) => {
             <div  style={mystyle} >
 
                 <section className="container">
-                    <h3 class=" mb-4 pb-2">CHOOSE OPTION</h3>
+                    <h3 className=" mb-4 pb-2">CHOOSE OPTION</h3>
                     <hr/>
-                    <div class ="row">
-                    <div class ="col-md-6 mb-4">
-                    <a onClick={e=>handleBook(e)} class ="card hoverable">
-                    <div class ="card-body my-4">
-                    <p><i class ="fas fa-tablet-alt fa-2x text-muted"></i></p>
-                    <h5 class ="black-text mb-0">TRUCK BOOKING</h5>
+                    <div className ="row">
+                    <div className ="col-md-6 mb-4">
+                    <a onClick={e=>handleBook(e)} className ="card hoverable">
+                    <div className ="card-body my-4">
+                    <p><i className ="fas fa-tablet-alt fa-2x text-muted"></i></p>
+                    <h5 className ="black-text mb-0">TRUCK BOOKING</h5>
                     </div>
                     </a>
                     </div>
-                    <div class ="col-md-6 mb-4">
-                    <a class ="card hoverable" onClick={e=>handleHistory(e)} style={{"color":"black"}}>
-                        <div class ="card-body my-4">
-                            <p><i class ="fas fa-cogs fa-2x text-muted"></i></p>
-                            <h5 class ="black-text mb-0">SEE HISTORY</h5>
+                    <div className ="col-md-6 mb-4">
+                    <a className ="card hoverable" onClick={e=>handleHistory(e)} style={{"color":"black"}}>
+                        <div className ="card-body my-4">
+                            <p><i className ="fas fa-cogs fa-2x text-muted"></i></p>
+                            <h5 className ="black-text mb-0">SEE HISTORY</h5>
                         </div>
                     </a>
                     </div>
-                    {/* <div class ="col-md-4 mb-4">
-                    <a href="#!" class ="card hoverable">
-                    <div class ="card-body my-4">
-                    <p><i class ="fas fa-pencil-ruler fa-2x text-muted"></i></p>
-                    <h5 class ="black-text mb-0">FEEDBACK</h5>
+                    {/* <div className ="col-md-4 mb-4">
+                    <a href="#!" className ="card hoverable">
+                    <div className ="card-body my-4">
+                    <p><i className ="fas fa-pencil-ruler fa-2x text-muted"></i></p>
+                    <h5 className ="black-text mb-0">FEEDBACK</h5>
                     </div>
                     </a>
                     </div> */}
@@ -106,7 +106,7 @@ const CustomerDashboard = ({history}) => {
                 </section>
             </div>
             <div style={mystyle}>
-                <img src="https://clockwise.software/img/blog/how-to-build-an-app-like-uber-for-trucks/header-background.png" class="img-fluid" alt="smaple image" />
+                <img src="https://clockwise.software/img/blog/how-to-build-an-app-like-uber-for-trucks/header-background.png" className="img-fluid" alt="smaple image" />
             </div>
             </div>
 
