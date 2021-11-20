@@ -105,7 +105,7 @@ const CustomerDashboard = ({history}) => {
                     </div>
                 </section>
             </div>
-            <div className="" style={mystyle}>
+            <div style={mystyle}>
                 <img src="https://clockwise.software/img/blog/how-to-build-an-app-like-uber-for-trucks/header-background.png" class="img-fluid" alt="smaple image" />
             </div>
             </div>

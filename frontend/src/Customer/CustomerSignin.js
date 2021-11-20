@@ -83,31 +83,28 @@ const CustomerSignin = ({history}) => {
             </nav>
             <div className="container my-5 px-0 z-depth-1">
                 <section className="p-5 my-md-5 text-center sec">
-
-                    <form className="my-5 mx-md-5" action="">
-
+                    <form className="my-5 mx-md-5">
                         <div className="row">
-                            <div className="col-md-6 mx-auto">
+                            <div className="col-6">
                                 <div className="card">
                                     <div className="card-body">
-                                        <form className="text-center col_clor" action="#!">
-
                                             <h3 className="font-weight-bold my-4 pb-2 text-center dark-grey-text">Log In Customer</h3>
                                             <input type="email" id="defaultSubscriptionFormPassword" className="form-control mb-4" value={email} placeholder="Email" onChange={(e) => setEmail(e.target.value)}/>
                                             <input type="password" id="defaultSubscriptionFormEmail" className="form-control" value={password} placeholder="Password" onChange={(e) => setPassword(e.target.value)}/>
                                             <small id="passwordHelpBlock" className="form-text text-right blue-text">
                                                 <a href="" onClick={e=>getToSignUp(e)}>SIGN UP?</a>
                                             </small>
-
                                             <div className="text-center">
                                                 <button type="button" className="btn btn-warning btn-rounded my-4 waves-effect" onClick={e=>submitData(e)}>LOGIN</button>
                                             </div>
-
-                                        </form>
-
                                     </div>
 
                                 </div>
+                            </div>
+                            <div className="col-6">
+                                
+                                        <img style={{"width":"104%","height":"100%"}} src="https://www.loginradius.com/blog/start-with-identity/static/3b4c33cef1861297f7da778dff9074a7/a3513/login-security.png"></img>
+                                
                             </div>
                         </div>
 

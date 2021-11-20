@@ -77,7 +77,7 @@ const TruckBooking = ({ history }) => {
 
 
     return (
-        <>
+        <section style={{"width":"100%", backgroundColor:"lightblue"}}>
             <nav className="navbar navbar-expand-lg navbar-light bg-col mb-4 bg-unique hm-gradient">
                 <div className="container-fluid">
                     <a className="navbar-brand" to="#">CENTRAL</a>
@@ -182,8 +182,8 @@ const TruckBooking = ({ history }) => {
                         <div>
                         </div>
                     </div>
-                    <section className="dark-grey-text mt-4 mb-4">
-                        <button className="btn btn-primary btn-lg btn-block" type="submit" onClick={e => submitData(e)}>SUBMIT</button>
+                    <section className="mt-4 mb-4 hoverable" style={{"width":"30%","marginLeft":"380px"}}>
+                        <button className="btn  btn-lg btn-block" type="submit" onClick={e => submitData(e)}>SUBMIT</button>
                     </section>
                 </section>
                 <section className="dark-grey-text mt-4 mb-4 card">
@@ -246,7 +246,7 @@ const TruckBooking = ({ history }) => {
             </div>
 
             <Footer />
-        </>
+        </section>
     )
 }
 
