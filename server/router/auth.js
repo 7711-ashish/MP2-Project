@@ -3,6 +3,7 @@ const router = express.Router();
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const Authenticate = require("../middleware/authenticate");
+const AdminAuthenticate = require("../middleware/authenticateAdmin");
 const ObjectId = require('mongodb').ObjectID
 require('../db/conn');
 
@@ -206,7 +207,7 @@ router.route("/userTruckList").post(async(req,res)=>{
 })
 
 router.route("/registerTransporter").post(async(req,res)=>{
-  const{name, email, phone, company,address, password, cpassword}= req.body; 
+  const{name, email, phone, company,address,pincode, password, cpassword}= req.body; 
   console.log(req.body.name);
   console.log(req.body.email);
   console.log(req.body.phone);
@@ -225,7 +226,7 @@ router.route("/registerTransporter").post(async(req,res)=>{
       console.log("Error password not matching");
       return res.status(422).json({err:" password not matching"});
     }else{
-      const transporter = new Transporter({name,email,phone,company,address,password,cpassword});
+      const transporter = new Transporter({name,email,phone,company,address,pincode,password,cpassword});
       const transRegister =  await transporter.save();
       console.log(transporter+'transporter Register success');
       console.log(transRegister);
@@ -427,7 +428,7 @@ router.route('/trans/history').post(async(req,res)=>{
 // })
 
 
-router.route('/trucks').get(async(req,res)=>{
+router.route('/truckList').get(async(req,res)=>{
   try{
     var truckList = await Truck.find();
     res.status(200).json(truckList);
@@ -457,6 +458,19 @@ router.route('/customerList').get(async(req,res)=>{
     console.log(err);
   }
 })
+
+router.route("/deleteTruck/:id").delete(async(req,res)=>{
+  try{
+    const id = req.params.id;
+   
+    const truck = await Truck.findByIdAndDelete({number:id});
+    res.json({message:"Truck deleted successfully"});
+  }catch(err){
+    console.log(err);
+  }
+});
+
+
 
 router.route('/logout').get((req,res)=>{
   res.clearCookie('jwt');

@@ -42,14 +42,23 @@ adminSchema.pre('save',async function(next){
 
 //generating token
 adminSchema.methods.generateAuthToken = async function(){
-  try{
-    let token = jwt.sign({_id:this._id}, process.env.SECREAT_KEY);
-    this.tokens = this.tokens.concat({token:token});
-    await this.save();
-    return token;
-  }catch(err){
-    console.log(err)
-  }
+  // try{
+  //   let token = jwt.sign({_id:this._id}, process.env.SECREAT_KEY);
+  //   this.tokens = this.tokens.concat({token:token});
+  //   await this.save();
+  //   return token;
+  // }catch(err){
+  //   console.log(err)
+  // }
+
+  const user = this;
+  const token = jwt.sign(
+    { _id: user._id.toString() },
+    "thisisuserverification"
+  );
+  user.tokens = user.tokens.concat({ token });
+  await user.save();
+  return token;
 }
 
 const Admin = mongoose.model('ADMIN',adminSchema);

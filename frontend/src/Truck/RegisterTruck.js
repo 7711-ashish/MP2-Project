@@ -36,7 +36,7 @@ const RegisterTruck=({ history })=> {
             window.alert("Invalid Registration");
         } else {
             window.alert("Success");
-            history.goback();
+            // history.goback();
         }
         // window.alert("Added success");
         // history.push('/transDash')

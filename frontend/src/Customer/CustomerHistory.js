@@ -40,6 +40,9 @@ const CustomerHistory = ({ history }) => {
         console.log(sessionStorage.getItem('authToken'))
         
     }
+    const handleDash=()=>{
+        history.push("/CustomerDashboard")
+    }
     return (
         <>
         <nav className="navbar navbar-expand-lg navbar-light bg-col mb-4 bg-unique hm-gradient">
@@ -51,7 +54,7 @@ const CustomerHistory = ({ history }) => {
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul className="navbar-nav ml-lg-4 mb-2 mb-lg-0">
                             <li className="nav-item active">
-                                <a className="nav-link active" aria-current="page" to="/">Home</a>
+                                <a className="nav-link active" aria-current="page" to="/" onClick={e=>{handleDash()}}>Home</a>
                             </li>
                             <li className="nav-item">
                                 <a className="nav-link" onClick={e=>{handleSignout(e)}}>SignOut</a>
@@ -63,8 +66,8 @@ const CustomerHistory = ({ history }) => {
         <div className="container">
             
         {
-        data.map(truck => (
-            <section className="card mb-4">
+        data.map((truck,idx) => (
+            <section className="card mb-4" key={idx}>
                 <div className="table-responsive">
                     <table className="table product-table table-cart-v-1">
                         <thead>

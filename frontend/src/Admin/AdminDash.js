@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import AdminTranslist from './AdminTranslist';
+import AdminTrucks from './AdminTrucks';
 import AdminCustomerList from './AdminCustomerList';
 const AdminDash = ({ history}) => {
     const [cntTruck, setTruck] = useState("");
@@ -7,7 +8,8 @@ const AdminDash = ({ history}) => {
     const [cntCust, setCust] = useState("");
     const [transporterList, setTransList] = React.useState([]);
     const [customerList, setCustomerList] = React.useState([]);
-    const [Flg, setFlg] = useState(false);
+    const [truckList, setTruckList] = React.useState([]);
+    const [Flg, setFlg] = useState("");
     useEffect(() => {
         sessionStorage.clear();
         console.log(sessionStorage.getItem('authtoken'));
@@ -43,23 +45,40 @@ const AdminDash = ({ history}) => {
                 setCustomerList(data);
             });
         }
+        function truckList() {
+            fetch('/truckList', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }).then(res => res.json()).then(data => {
+                setTruckList(data);
+            });
+        }
         count();
         transporterList();
         customerList();
+        truckList();
     }, [])
 
     const handleFlag = (e,role) => {
         // e.preventDefault();
         if(role === 'trans'){
-            setFlg(false);
+            setFlg("");
+        }
+        else if(role === 'customer'){
+            setFlg("1");
         }
         else{
-            setFlg(true);
+            setFlg("2");
         }
-        
     }
     const handleSignout=(e)=>{
+        e.preventDefault();
         history.push('/');
+    }
+    const mystyle={
+        height:"50"
     }
     return (
         <>
@@ -67,17 +86,16 @@ const AdminDash = ({ history}) => {
                 <div className="container-fluid">
                     <strong><a className="navbar-brand" to="#">FREIGTHCENTRAL</a></strong>
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul className="navbar-nav ml-lg-2 mb-2 mb-lg-0">
-
-                            <li className="nav-item">
-                                <a className="nav-link"onCLick={e=>handleSignout(e)}>SignOut</a>
-                            </li>
-                        </ul>
+                        <div className="navbar-nav ml-lg-2 mb-2 mb-lg-0">
+                            <a className="nav-item">
+                                <button className="nav-link"onClick={e=>handleSignout(e)}>SignOut</button>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </nav>
             <section className=" container">
-            <div class="container">
+            <div class="container" >
                 <div className="row">
                     <div class="col-4 mb-4">
                         <a class="card hoverable" style={{"color":"black"}}>
@@ -105,17 +123,23 @@ const AdminDash = ({ history}) => {
                     </div>
                 </div>
                 <div className="row mt-4">
-                    <div class="col-6 mb-4">
+                    <div class="col-4 mb-4">
                         <a className="card hoverable" onClick={e=>handleFlag(e,"trans")} style={{"color":"black"}} name="trans">
                         <div class="card-body my-4">
                             <h4 ><strong>TRANSPORTER LIST</strong> </h4>
                         </div>
                         </a>
                     </div>
-                    <div class="col-6 mb-4">
+                    <div class="col-4 mb-4">
                         <a className="card hoverable" onClick={e=>handleFlag(e,"customer")} style={{"color":"black"}}  name="trans">
                         <div class="card-body my-4">
                             <h4><strong>CUSTOMER LIST</strong> </h4>
+                        </div>
+                        </a>
+                    </div><div class="col-4 mb-4">
+                        <a className="card hoverable" onClick={e=>handleFlag(e,"truck")} style={{"color":"black"}}  name="trans">
+                        <div class="card-body my-4">
+                            <h4><strong>Truck LIST</strong> </h4>
                         </div>
                         </a>
                     </div>
@@ -123,8 +147,15 @@ const AdminDash = ({ history}) => {
             </div>
             </section>
             <section className="container">
+                <div className="row">  
+                    <div className="col-md-12">
+                        {Flg ===""? <h1>Transporter List</h1>:Flg ==="1"? <h1>Customer List</h1>:<h1>Truck List</h1>}
+                    </div>
+                </div>
+            </section>
+            <section className="container">
             {
-                Flg === false ?<AdminTranslist props={transporterList}/>: <AdminCustomerList props={customerList}/>
+                Flg === "" ?<AdminTranslist props={transporterList}/>:Flg === "1" ? <AdminCustomerList props={customerList}/>:<AdminTrucks props={truckList}/>
             }
             </section>
         </>

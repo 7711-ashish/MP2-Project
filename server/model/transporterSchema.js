@@ -22,6 +22,10 @@ const transporterSchema = new mongoose.Schema({
   address:{
     type: String,
   },
+  pincode:{
+    type: String,
+    required : true
+  },
   password:{
     type: String,
     required : true

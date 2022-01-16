@@ -71,7 +71,10 @@ const CustomerSignup = ({history}) => {
             history.push("/Customersignin");
         }
     }
-
+    const mystyle = {
+        width : "50%",
+        margin : "0 auto",
+    }
     return (
         <div className="container-fluid stle">
 
@@ -115,7 +118,7 @@ const CustomerSignup = ({history}) => {
                                             <input type="date" id="form4"placeholder="date" name="date"value={user.date} className="form-control" onChange={e => handleChangeEvent(e)} />
                                         </div>
                                         <div className="text-center my-3">
-                                            <button className="btn btn-indigo btn-block" onClick={e=>{submitData(e)}}>SIGNUP</button>
+                                            <button className="btn btn-primary btn-block" style={mystyle} onClick={e=>{submitData(e)}}>SIGNUP</button>
                                         </div>
                                     </div>
                                 </div>

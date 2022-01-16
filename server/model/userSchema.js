@@ -29,6 +29,7 @@ const userSchema = new mongoose.Schema({
   },
   dob:{
     type:String,
+    required:true
   },
   tokens:[
     {

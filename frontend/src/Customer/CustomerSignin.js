@@ -58,6 +58,10 @@ const CustomerSignin = ({history}) => {
         e.preventDefault();
         history.push('/')
     }
+    const handleAbout=(e)=>{
+        // e.preventDefault();
+        history.push('./AboutUs')
+    }
     return (
         <>
             <nav className="navbar navbar-expand-lg navbar-light bg-col mb-4 bg-unique hm-gradient">
@@ -72,7 +76,7 @@ const CustomerSignin = ({history}) => {
                                 <a className="nav-link active" aria-current="page" to="/"onClick={e=>handleHome(e)}>Home</a>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link" to="/about">About</a>
+                                <a className="nav-link" to="/AboutUs" onClick={e=>handleAbout()}>About</a>
                             </li>
                             <li className="nav-item">
                                 <a className="nav-link" onClick={e=>handleCont()}>Contact</a>

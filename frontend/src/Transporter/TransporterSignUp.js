@@ -14,18 +14,18 @@ const TransporterSignup = ({history}) => {
 
 
 
-    const [user, setUser] = useState({
-        name: "", email: "", phone: "", company: "", password: "", cpassword: ""
+    const [transporter, settransporter] = useState({
+        name: "", email: "", phone: "", company: "",address:"",pincode:"", password: "", cpassword: ""
     });
     let name, value;
     const handleChangeEvent = (e,field) => {
         name = e.target.name;
         value = e.target.value;
-        setUser({ ...user, [name]: value })
+        settransporter({ ...transporter, [name]: value })
         if (field === 'email') {
             var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
             if (value.match(mailformat)) {
-                setUser({ ...user, [name]: value })
+                settransporter({ ...transporter, [name]: value })
                 return true
             } else {
                 alert("You have entered an invalid email address!");
@@ -34,7 +34,7 @@ const TransporterSignup = ({history}) => {
         } else if (field === 'password') {
             var passwordFormat = /^[A-Za-z]\w{7,14}$/;
             if (value.match(passwordFormat)) {
-                setUser({ ...user, [name]: value })
+                settransporter({ ...transporter, [name]: value })
                 return true
             }else{
                 alert("Input Password and Submit [7 to 15 characters which contain only characters, numeric digits, underscore and first character must be a letter]")
@@ -51,14 +51,14 @@ const TransporterSignup = ({history}) => {
     // submiting data to backend
     const submitData = async(e) => {
         e.preventDefault();
-        const { name, email, phone, company, password,address} = user;
+        const { name, email, phone, company,address,pincode, password} = transporter;
         const res = await fetch("/registerTransporter", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                name: name, email: email, phone: phone, company: company, password: password, cpassword:password, address:address
+                name: name, email: email, phone: phone, company: company,address:address,pincode:pincode, password: password, cpassword:password
             })
         });
 
@@ -70,6 +70,10 @@ const TransporterSignup = ({history}) => {
             window.alert("Success");
             history.push("/transSignin");
         }
+    }
+    const mystyle = {
+        width : "50%",
+        margin : "0 auto",
     }
 
     return (
@@ -90,25 +94,28 @@ const TransporterSignup = ({history}) => {
                                 <div class="card">
                                     <div class="card-body z-depth-2 px-4">
                                         <div class="md-form mt-3">
-                                            <input type="text"  value={user.name} placeholder="name" name="name" class="form-control" onChange={e => handleChangeEvent(e)} />
+                                            <input type="text"  value={transporter.name} placeholder="name" name="name" class="form-control" onChange={e => handleChangeEvent(e)} />
                                         </div>
                                         <div class="md-form mt-3">
-                                            <input type="text"  value={user.email} placeholder="email" name="email" class="form-control" onChange={e => handleChangeEvent(e)} />
+                                            <input type="text"  value={transporter.email} placeholder="email" name="email" class="form-control" onChange={e => handleChangeEvent(e)} />
                                         </div>
                                         <div class="md-form mt-3">
-                                            <input type="number"  value={user.phone} placeholder="+91 1234567980" name="phone" class="form-control" onChange={e => handleChangeEvent(e)} />
+                                            <input type="number"  value={transporter.phone} placeholder="+91 1234567980" name="phone" class="form-control" onChange={e => handleChangeEvent(e)} />
                                         </div>
                                         <div class="md-form mt-3">
-                                            <input type="text"  value={user.company} placeholder="Company Name" name="company" class="form-control" onChange={e=>handleChangeEvent(e)}/>
+                                            <input type="text"  value={transporter.company} placeholder="Company Name" name="company" class="form-control" onChange={e=>handleChangeEvent(e)}/>
                                         </div>
                                         <div class="md-form mt-3">
-                                            <input type="textarea" placeholder="Address" name="address" class="form-control" onChange={e=> handleChangeEvent(e)}/>
+                                            <input type="text" value={transporter.address}placeholder="Address" name="address" class="form-control" onChange={e=> handleChangeEvent(e)}/>
                                         </div>
                                         <div class="md-form mt-3">
-                                            <input type="password"  value={user.password} placeholder="password" name="password" class="form-control"minlength="8" onChange={e => handleChangeEvent(e)} />
+                                            <input type="text" value={transporter.pincode}placeholder="Pin Code" name="pincode" class="form-control" onChange={e=> handleChangeEvent(e)}/>
                                         </div>
                                         <div class="md-form mt-3">
-                                            <input type="password"  value={user.cpassword} placeholder="cpassword" name="cpassword" class="form-control"minlength="8" onChange={e => handleChangeEvent(e)} />
+                                            <input type="password"  value={transporter.password} placeholder="password" name="password" class="form-control"minlength="8" onChange={e => handleChangeEvent(e)} />
+                                        </div>
+                                        <div class="md-form mt-3">
+                                            <input type="password"  value={transporter.cpassword} placeholder="cpassword" name="cpassword" class="form-control"minlength="8" onChange={e => handleChangeEvent(e)} />
                                         </div>
                                        
                                         <div class="md-form mt-3">
@@ -118,7 +125,7 @@ const TransporterSignup = ({history}) => {
                                             <input type="date" placeholder="name" name="name" class="form-control" />
                                         </div>
                                         <div class="text-center my-3">
-                                            <button class="btn btn-indigo btn-block" onClick={e=>{submitData(e)}}>SIGNUP</button>
+                                            <button class="btn btn-primary btn-block" style={mystyle} onClick={e=>{submitData(e)}}>SIGNUP</button>
                                         </div>
                                     </div>
                                 </div>
